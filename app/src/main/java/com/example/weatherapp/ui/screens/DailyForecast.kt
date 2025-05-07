@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
@@ -40,16 +43,16 @@ fun ForecastedDay(fc: Forecast ){
         modifier = Modifier
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
-            .padding(10.dp)
+            .padding(all = 10.dp)
+            .border(3.dp, MaterialTheme.colorScheme.secondary , RectangleShape)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         //date
         Text(
             text = fc.date,
             color = MaterialTheme.colorScheme.primary,
-
+            style = MaterialTheme.typography.titleLarge
         )
-
         Spacer(modifier = Modifier.height(10.dp))
 
         Image(
@@ -61,12 +64,16 @@ fun ForecastedDay(fc: Forecast ){
         Spacer(modifier = Modifier.height(10.dp))
 
         //Temperature
-        Column {
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(
-                text = "Temperature"
+                text = "Temperature",
+                style = MaterialTheme.typography.titleMedium
             )
             Row {
                 Text(text = "High: " + fc.tempHigh)
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(text = "Low: " + fc.tempLow)
             }
         }
@@ -74,25 +81,28 @@ fun ForecastedDay(fc: Forecast ){
 
         //Condition
         Text(
-            text = fc.condition
+            text = fc.condition,
+            style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         //precipitation
         Column (horizontalAlignment = Alignment.CenterHorizontally){
             Text(text = "Precipitation type: " + fc.precipType)
             Row {
                 Text(text = "Amount: " + fc.precipAmount)
-                Text(text = "Amount: " + fc.precipProbability)
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(text = "Probability: " + fc.precipProbability + "%")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
 
         //Wind
-        Column {
-            Text(text= "Wind")
+        Column (horizontalAlignment = Alignment.CenterHorizontally){
+            Text(text= "Wind", style = MaterialTheme.typography.titleMedium)
             Row {
                 Text(text = "Speed: " + fc.windSpeed)
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(text = "Direction: " + fc.windDirection)
             }
         }
@@ -100,7 +110,7 @@ fun ForecastedDay(fc: Forecast ){
 
         //Humidity
         Text(
-            text = "Humidity: " + fc.humidity
+            text = "Humidity: " + fc.humidity + "%",
         )
 
 
@@ -110,7 +120,7 @@ fun ForecastedDay(fc: Forecast ){
 
 @Composable
 fun ThreeDayForecast(){
-    Column (
+    Column ( //using Column instead of LazyColumn given max items are going to be 3 for now
         modifier = Modifier
             .verticalScroll(state = rememberScrollState())
     ){
