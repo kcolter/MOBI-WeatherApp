@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 
 
-//rewrite data class once API/data-source and format is known
+//rewrite data class once API/data-source and format is known.
 data class Forecast(val date: String, val imageRef: String, val tempHigh: Double, val tempLow: Double,
                     val condition: String, val precipType: String, val precipAmount: String, val precipProbability: Double,
                     val windDirection: String, val windSpeed: Double,
@@ -55,6 +55,7 @@ fun ForecastedDay(fc: Forecast ){
         )
         Spacer(modifier = Modifier.height(10.dp))
 
+        //Weather image
         Image(
             painter = painterResource(R.drawable.rainy),
             contentDescription = "Weather Image [Rainy]",
@@ -62,6 +63,13 @@ fun ForecastedDay(fc: Forecast ){
                 .size(100.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
+
+        //Condition
+        Text(
+            text = fc.condition,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Spacer(modifier = Modifier.height(20.dp))
 
         //Temperature
         Column (
@@ -72,23 +80,16 @@ fun ForecastedDay(fc: Forecast ){
                 style = MaterialTheme.typography.titleMedium
             )
             Row {
-                Text(text = "High: " + fc.tempHigh)
+                Text(text = "High: " + fc.tempHigh + "° celsius")
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Low: " + fc.tempLow)
+                Text(text = "Low: " + fc.tempLow + "° celsius")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
 
-        //Condition
-        Text(
-            text = fc.condition,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(5.dp))
-
-        //precipitation
+        //Precipitation
         Column (horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Precipitation type: " + fc.precipType)
+            Text(text = "Precipitation type: " + fc.precipType, style = MaterialTheme.typography.titleMedium)
             Row {
                 Text(text = "Amount: " + fc.precipAmount)
                 Spacer(modifier = Modifier.width(10.dp))
@@ -101,7 +102,7 @@ fun ForecastedDay(fc: Forecast ){
         Column (horizontalAlignment = Alignment.CenterHorizontally){
             Text(text= "Wind", style = MaterialTheme.typography.titleMedium)
             Row {
-                Text(text = "Speed: " + fc.windSpeed)
+                Text(text = "Speed: " + fc.windSpeed + " km/h")
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(text = "Direction: " + fc.windDirection)
             }
@@ -111,10 +112,9 @@ fun ForecastedDay(fc: Forecast ){
         //Humidity
         Text(
             text = "Humidity: " + fc.humidity + "%",
+            modifier = Modifier
+                .padding(bottom = 10.dp)
         )
-
-
-
     }
 }
 
@@ -123,6 +123,7 @@ fun ThreeDayForecast(){
     Column ( //using Column instead of LazyColumn given max items are going to be 3 for now
         modifier = Modifier
             .verticalScroll(state = rememberScrollState())
+            .padding(top = 20.dp)
     ){
         ForecastedDay(SampleForecasts.day1)
         ForecastedDay(SampleForecasts.day2)

@@ -4,10 +4,12 @@ import com.example.weatherapp.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,12 +31,14 @@ import androidx.compose.ui.unit.dp
 fun CurrentWeatherUI(){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(state = rememberScrollState())
             .background(color = MaterialTheme.colorScheme.background)
-            .padding(20.dp)
-            .fillMaxSize()
+            .padding(all = 20.dp)
+            .fillMaxWidth()
+            .border(3.dp, MaterialTheme.colorScheme.secondary , RectangleShape)
     )
     {
         //Weather Image
@@ -43,7 +47,7 @@ fun CurrentWeatherUI(){
             contentDescription = "Weather Image [Rainy]",
             modifier = Modifier
                 .size(100.dp)
-
+                .padding(top = 20.dp)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -93,7 +97,4 @@ fun CurrentWeatherUI(){
             )
         }
     }
-
-
-
 }
