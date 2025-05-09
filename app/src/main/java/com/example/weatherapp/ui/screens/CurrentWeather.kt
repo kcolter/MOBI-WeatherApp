@@ -54,14 +54,14 @@ fun CurrentWeatherUI(){
         //Condition
         Text(
             text = "Cloudy with Showers",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Temp.
         Text(
             text = "10° celsius",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -69,28 +69,34 @@ fun CurrentWeatherUI(){
         Row {
             Text(
                 text = "Rain",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = "~10mm",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleLarge
             )
         }
+        Spacer(modifier = Modifier.height(20.dp))
 
-        Spacer(modifier = Modifier.height(5.dp))
+        ///Wind direction and speed on same row
+        Column (horizontalAlignment = Alignment.CenterHorizontally){
+            Text(
+                text = "Wind",
+                style = MaterialTheme.typography.titleLarge
+            )
 
-        ///wind direction and speed on same row
-        Row {
-            Text(
-                text = "21 km/h",
-                style = MaterialTheme.typography.titleMedium
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(
-                text = "S/SW Wind",
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row {
+                Text(
+                    text = "S/SW",
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = "21 km/h",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
         }
     }
 }
