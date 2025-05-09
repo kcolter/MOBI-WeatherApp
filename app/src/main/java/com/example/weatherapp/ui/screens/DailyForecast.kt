@@ -36,6 +36,8 @@ object SampleForecasts {
     val day3 = Forecast("5/11/2025", "imageref", 17.0, 7.0, "Yet more rain", "Rain", "~1mm", 25.0, "West", 15.0, 10.0)
 }
 
+
+
 @Composable
 fun ForecastedDay(fc: Forecast ){
     Column(

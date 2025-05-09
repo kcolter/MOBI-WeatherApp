@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.weatherapp.ui.screens.CurrentWeatherUI
 import com.example.weatherapp.ui.screens.ThreeDayForecast
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 //entry point
-                ThreeDayForecast()
+                CurrentWeatherUI()
             }
         }
     }

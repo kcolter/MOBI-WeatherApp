@@ -49,24 +49,20 @@ fun CurrentWeatherUI(){
                 .size(100.dp)
                 .padding(top = 20.dp)
         )
-
         Spacer(modifier = Modifier.height(20.dp))
 
-        //Condition and Temp on same row
-        Row {
-            //Condition
-            Text(
-                text = "Cloudy with Showers",
-                style = MaterialTheme.typography.titleMedium
-            )
+        //Condition
+        Text(
+            text = "Cloudy with Showers",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Spacer(modifier = Modifier.height(20.dp))
 
-            //Temp.
-            Text(
-                text = "10° celsius",
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-
+        //Temp.
+        Text(
+            text = "10° celsius",
+            style = MaterialTheme.typography.titleMedium
+        )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Precip. type and amount on same row
