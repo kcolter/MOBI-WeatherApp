@@ -20,6 +20,7 @@ data class Forecast(
     val precitationProbability: Double,
     val windDirection: String,
     val windSpeed: Double,
+    val humiditiy: Double,
     val imagePath: String //potentially unneeded: unknown if a URI will be supplied by API, or if we're going to use local resources based on condition
     )
 
