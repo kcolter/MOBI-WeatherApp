@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -85,7 +83,7 @@ fun ForecastedDay(fc: Forecast){
             Row {
                 Text(text = "Amount: " + fc.precipitationAmount)
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Probability: " + fc.precitationProbability + "%")
+                Text(text = "Probability: " + fc.precipitationProbability + "%")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -103,7 +101,7 @@ fun ForecastedDay(fc: Forecast){
 
         //Humidity
         Text(
-            text = "Humidity: " + fc.humiditiy + "%",
+            text = "Humidity: " + fc.humidity + "%",
             modifier = Modifier
                 .padding(bottom = 10.dp)
         )
@@ -117,7 +115,6 @@ fun ThreeDayForecast(mainViewModel: MainViewModel){
 
     LazyColumn (
         modifier = Modifier
-            //.verticalScroll(state = rememberScrollState()) //using LazyColumn with verticalScroll caused crash
             .padding(top = 20.dp)
     ){
 
