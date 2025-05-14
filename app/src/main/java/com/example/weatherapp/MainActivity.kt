@@ -1,6 +1,5 @@
 package com.example.weatherapp
 
-import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
