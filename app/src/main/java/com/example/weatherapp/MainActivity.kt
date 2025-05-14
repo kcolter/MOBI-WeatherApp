@@ -129,7 +129,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
 
                 composable(route = "forecast"){
                     if (w != null) {
-                        ThreeDayForecast(w.forecasts)
+                        ThreeDayForecast(mainViewModel)
                     }
                 }
             }

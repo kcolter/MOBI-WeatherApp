@@ -18,15 +18,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.weatherapp.MainViewModel
 import com.example.weatherapp.R
+import com.example.weatherapp.models.Forecast
 
 @Composable
-fun ForecastedDay(fc: com.example.weatherapp.models.Forecast){
+fun ForecastedDay(fc: Forecast){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -108,14 +111,21 @@ fun ForecastedDay(fc: com.example.weatherapp.models.Forecast){
 }
 
 @Composable
-fun ThreeDayForecast(forecasts: List<com.example.weatherapp.models.Forecast>){
-    LazyColumn ( //using Column instead of LazyColumn given max items are going to be 3 for now
+fun ThreeDayForecast(mainViewModel: MainViewModel){
+
+    val weather = mainViewModel.weather.collectAsState().value
+
+    LazyColumn (
         modifier = Modifier
-            .verticalScroll(state = rememberScrollState())
+            //.verticalScroll(state = rememberScrollState()) //using LazyColumn with verticalScroll caused crash
             .padding(top = 20.dp)
     ){
-        items(forecasts) { fc ->
-            ForecastedDay(fc)
+
+        //created a ForecastedDay item from each forecast in the list IF weather is not null
+        if (weather != null) {
+            items(weather.forecasts) { fc ->
+                ForecastedDay(fc)
+            }
         }
     }
 }
