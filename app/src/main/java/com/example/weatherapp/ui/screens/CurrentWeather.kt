@@ -25,10 +25,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.weatherapp.models.Current
 import com.example.weatherapp.models.Weather
 
 @Composable
-fun CurrentWeatherUI(weather: Weather){
+fun CurrentWeatherUI(current: Current){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -53,14 +54,14 @@ fun CurrentWeatherUI(weather: Weather){
 
         //Condition
         Text(
-            text = weather.currentWeather.condition,
+            text = current.condition,
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Temp.
         Text(
-            text = "" + weather.currentWeather + "° celsius",
+            text = current.temperature.toString() + "° celsius",
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -68,12 +69,12 @@ fun CurrentWeatherUI(weather: Weather){
         //Precip. type and amount on same row
         Row {
             Text(
-                text = weather.currentWeather.precipitationType,
+                text = current.precipitationType,
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = weather.currentWeather.precipitationAmount.toString(),
+                text = current.precipitationAmount.toString() + "mm",
                 style = MaterialTheme.typography.titleLarge
             )
         }
@@ -88,12 +89,12 @@ fun CurrentWeatherUI(weather: Weather){
 
             Row {
                 Text(
-                    text = weather.currentWeather.windDirection,
+                    text = current.windDirection,
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = weather.currentWeather.windSpeed.toString() + " km/h",
+                    text = current.windSpeed.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

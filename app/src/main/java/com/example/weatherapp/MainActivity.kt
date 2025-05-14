@@ -18,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Modifier
@@ -116,7 +117,10 @@ fun DisplayUI(mainViewModel: MainViewModel){
                 modifier = Modifier.padding(innerPadding)
             ){
                 composable(route = "current"){
-                    CurrentWeatherUI()
+                    val cur = mainViewModel.weather.collectAsState().value
+                    if (cur != null) {
+                        CurrentWeatherUI(cur.currentWeather)
+                    }
                 }
 
                 composable(route = "forecast"){
