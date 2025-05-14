@@ -25,10 +25,10 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.weatherapp.models.Weather
 
-@Preview
 @Composable
-fun CurrentWeatherUI(){
+fun CurrentWeatherUI(weather: Weather){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -53,14 +53,14 @@ fun CurrentWeatherUI(){
 
         //Condition
         Text(
-            text = "Cloudy with Showers",
+            text = weather.currentWeather.condition,
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Temp.
         Text(
-            text = "10° celsius",
+            text = "" + weather.currentWeather + "° celsius",
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -68,12 +68,12 @@ fun CurrentWeatherUI(){
         //Precip. type and amount on same row
         Row {
             Text(
-                text = "Rain",
+                text = weather.currentWeather.precipitationType,
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = "~10mm",
+                text = weather.currentWeather.precipitationAmount.toString(),
                 style = MaterialTheme.typography.titleLarge
             )
         }
@@ -88,12 +88,12 @@ fun CurrentWeatherUI(){
 
             Row {
                 Text(
-                    text = "S/SW",
+                    text = weather.currentWeather.windDirection,
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = "21 km/h",
+                    text = weather.currentWeather.windSpeed.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

@@ -5,6 +5,8 @@ data class Current(
     val temperature: Double,
     val precipitationType: String,
     val precipitationAmount: Double,
+    val windDirection: String,
+    val windSpeed: Double,
     val imagePath: String //potentially unneeded: unknown if a URI will be supplied by API, or if we're going to use local resources based on condition
     )
 

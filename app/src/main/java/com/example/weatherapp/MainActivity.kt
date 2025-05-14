@@ -27,15 +27,25 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    //define view model
+    private lateinit var mainViewModel: MainViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
+
+                //init view model
+                mainViewModel = viewModel();
+
                 //entry point
-                DisplayUI()
+                DisplayUI(mainViewModel)
             }
         }
     }
@@ -43,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DisplayUI(){
+fun DisplayUI(mainViewModel: MainViewModel){
 
     //nav controller
     val navController = rememberNavController()
