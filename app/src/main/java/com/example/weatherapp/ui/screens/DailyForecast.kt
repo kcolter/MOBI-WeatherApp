@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -121,14 +123,14 @@ fun ForecastedDay(fc: Forecast ){
 }
 
 @Composable
-fun ThreeDayForecast(){
-    Column ( //using Column instead of LazyColumn given max items are going to be 3 for now
+fun ThreeDayForecast(forecasts: List<Forecast>){
+    LazyColumn ( //using Column instead of LazyColumn given max items are going to be 3 for now
         modifier = Modifier
             .verticalScroll(state = rememberScrollState())
             .padding(top = 20.dp)
     ){
-        ForecastedDay(SampleForecasts.day1)
-        ForecastedDay(SampleForecasts.day2)
-        ForecastedDay(SampleForecasts.day3)
+        items(forecasts) { fc ->
+            ForecastedDay(fc)
+        }
     }
 }
