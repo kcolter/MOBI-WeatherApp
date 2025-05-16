@@ -22,6 +22,7 @@ class MainViewModel : ViewModel() {
                 Forecast("May 17, 2025", 17.0, 7.1, "Sunny", "None", 0.0, 0.0, "North", 10.1, 10.0, "imgpath")
             )
         )
+        //set value of weather object
         _weather.value = w
     }
 }

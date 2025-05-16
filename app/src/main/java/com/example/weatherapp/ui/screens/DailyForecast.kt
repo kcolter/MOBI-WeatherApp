@@ -47,8 +47,8 @@ fun ForecastedDay(fc: Forecast){
 
         //Weather image
         Image(
-            painter = painterResource(R.drawable.rainy),
-            contentDescription = "Weather Image [Rainy]",
+            painter = painterResource(R.drawable.sun),
+            contentDescription = "Weather Image [placeholder]",
             modifier = Modifier
                 .size(100.dp)
         )

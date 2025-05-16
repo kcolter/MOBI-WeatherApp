@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
             WeatherAppTheme {
 
                 //init view model
-                mainViewModel = viewModel();
+                mainViewModel = viewModel()
 
                 //entry point
                 DisplayUI(mainViewModel)
@@ -113,7 +113,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
         innerPadding ->
 
         //getting the weather as state
-        val w = mainViewModel.weather.collectAsState().value
+        val weather = mainViewModel.weather.collectAsState().value
 
             NavHost(
                 navController = navController,
@@ -122,22 +122,16 @@ fun DisplayUI(mainViewModel: MainViewModel){
             ){
                 composable(route = "current"){
 
-                    if (w != null) {
-                        CurrentWeatherUI(w.currentWeather)
+                    if (weather != null) {
+                        CurrentWeatherUI(weather.currentWeather)
                     }
                 }
 
                 composable(route = "forecast"){
-                    if (w != null) {
+                    if (weather != null) {
                         ThreeDayForecast(mainViewModel)
                     }
                 }
             }
     }
-
-
-
-
-
-
 }
