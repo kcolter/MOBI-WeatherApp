@@ -41,11 +41,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
+                //entry point
 
                 //init view model
                 mainViewModel = viewModel()
 
-                //entry point
+                //call UI
                 DisplayUI(mainViewModel)
             }
         }
@@ -111,8 +112,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
         }
     ){
         innerPadding ->
-
-        //getting the weather as state
+        //get weather as state
         val weather = mainViewModel.weather.collectAsState().value
 
             NavHost(
@@ -121,7 +121,6 @@ fun DisplayUI(mainViewModel: MainViewModel){
                 modifier = Modifier.padding(innerPadding)
             ){
                 composable(route = "current"){
-
                     if (weather != null) {
                         CurrentWeatherUI(weather.currentWeather)
                     }
