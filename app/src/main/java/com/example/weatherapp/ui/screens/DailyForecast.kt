@@ -81,7 +81,7 @@ fun ForecastedDay(fc: Forecast){
         Column (horizontalAlignment = Alignment.CenterHorizontally){
             Text(text = "Precipitation type: " + fc.precipitationType, style = MaterialTheme.typography.titleMedium)
             Row {
-                Text(text = "Amount: " + fc.precipitationAmount)
+                Text(text = "Amount: " + fc.precipitationAmount + "mm") //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(text = "Probability: " + fc.precipitationProbability + "%")
             }

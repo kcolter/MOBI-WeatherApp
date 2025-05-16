@@ -77,7 +77,7 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = weather?.currentWeather?.precipitationAmount.toString() + "mm",
+                text = weather?.currentWeather?.precipitationAmount.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 style = MaterialTheme.typography.titleLarge
             )
         }
