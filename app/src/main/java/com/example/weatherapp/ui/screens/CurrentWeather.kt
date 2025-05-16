@@ -19,17 +19,19 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.weatherapp.models.Current
-import com.example.weatherapp.models.Weather
+import com.example.weatherapp.MainViewModel
 
 @Composable
-fun CurrentWeatherUI(current: Current){
+fun CurrentWeatherUI(mainViewModel: MainViewModel){
+
+    val weather = mainViewModel.weather.collectAsState().value
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -52,29 +54,30 @@ fun CurrentWeatherUI(current: Current){
         )
         Spacer(modifier = Modifier.height(20.dp))
 
+        //use of safe call operator researched from https://kotlinlang.org/docs/null-safety.html#safe-call-operator
         //Condition
         Text(
-            text = current.condition,
+            text = weather?.currentWeather?.condition.toString(),
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Temp.
         Text(
-            text = current.temperature.toString() + "° celsius",
+            text = weather?.currentWeather?.temperature.toString() + "° celsius",
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        //Precip. type and amount on same row
+        //Precipitation type and amount on same row
         Row {
             Text(
-                text = current.precipitationType,
+                text = weather?.currentWeather?.precipitationType.toString(),
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = current.precipitationAmount.toString() + "mm",
+                text = weather?.currentWeather?.precipitationAmount.toString() + "mm",
                 style = MaterialTheme.typography.titleLarge
             )
         }
@@ -89,12 +92,12 @@ fun CurrentWeatherUI(current: Current){
 
             Row {
                 Text(
-                    text = current.windDirection,
+                    text = weather?.currentWeather?.windDirection.toString(),
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = current.windSpeed.toString() + " km/h",
+                    text = weather?.currentWeather?.windSpeed.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

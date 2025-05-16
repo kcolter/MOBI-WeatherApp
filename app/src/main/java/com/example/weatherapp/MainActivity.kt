@@ -122,7 +122,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
             ){
                 composable(route = "current"){
                     if (weather != null) {
-                        CurrentWeatherUI(weather.currentWeather)
+                        CurrentWeatherUI(mainViewModel)
                     }
                 }
 
