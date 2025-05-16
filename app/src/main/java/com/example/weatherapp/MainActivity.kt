@@ -97,14 +97,14 @@ fun DisplayUI(mainViewModel: MainViewModel){
                     )},
                 )
                 NavigationBarItem(
-                    label = {Text("3 Day Forecast")},
+                    label = {Text("Forecast")},
                     selected = selectedIndex == 1,
                     onClick = {
                         selectedIndex = 1
                         navController.navigate("forecast")
                               },
                     icon = { Icon(
-                        painter =painterResource(R.drawable.ic_action_today),
+                        painter =painterResource(R.drawable.ic_action_forecast),
                         contentDescription = "current forecast"
                     )},
                 )
