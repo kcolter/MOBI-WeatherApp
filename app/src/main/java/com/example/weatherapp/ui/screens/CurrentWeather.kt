@@ -64,7 +64,7 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
 
         //Temp.
         Text(
-            text = weather?.currentWeather?.temperature.toString() + "° celsius",
+            text = weather?.currentWeather?.temp_c.toString() + "° celsius",
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -77,7 +77,7 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = weather?.currentWeather?.precipitationAmount.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
+                text = weather?.currentWeather?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 style = MaterialTheme.typography.titleLarge
             )
         }
@@ -92,12 +92,12 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
 
             Row {
                 Text(
-                    text = weather?.currentWeather?.windDirection.toString(),
+                    text = weather?.currentWeather?.wind_dir.toString(),
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = weather?.currentWeather?.windSpeed.toString() + " km/h",
+                    text = weather?.currentWeather?.wind_kph.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }
