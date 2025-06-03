@@ -129,22 +129,19 @@ fun DisplayUI(mainViewModel: MainViewModel){
         }
     ){
         innerPadding ->
-        //get weather as state
-        val w = mainViewModel.weather.collectAsState().value
-
             NavHost(
                 navController = navController,
                 startDestination = "current",
                 modifier = Modifier.padding(innerPadding)
             ){
                 composable(route = "current"){
-                    if (w != null) {
+                    if (weather != null) {
                         CurrentWeatherUI(mainViewModel)
                     }
                 }
 
                 composable(route = "forecast"){
-                    if (w != null) {
+                    if (weather != null) {
                         MultiDayForecast(mainViewModel)
                     }
                 }
