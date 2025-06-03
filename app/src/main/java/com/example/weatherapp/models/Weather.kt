@@ -37,7 +37,7 @@ data class Day(
     val precipitationType: String,
     @SerializedName("totalprecip_mm")val precipitationAmount: Double,
     @SerializedName("daily_chance_of_rain") val precipitationProbability: Double,
-    val windDirection: String,
+    val windDirection: String
 )
 
 data class Location(

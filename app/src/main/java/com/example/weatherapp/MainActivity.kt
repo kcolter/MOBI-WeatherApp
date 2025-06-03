@@ -71,6 +71,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DisplayUI(mainViewModel: MainViewModel){
 
+    //weather cariable to allow collection of value as state
+    val weather = mainViewModel.weather.collectAsState().value
+
     //nav controller
     val navController = rememberNavController()
 
@@ -81,9 +84,9 @@ fun DisplayUI(mainViewModel: MainViewModel){
         topBar = {
             TopAppBar(
                 title = {
-                    Text("Halifax, NS")
+                    Text(weather?.location?.name + ", " + weather?.location?.region + ", " + weather?.location?.country)
                 },
-                //colours for top nav bar
+                //colours for top bar
                 colors = TopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
@@ -127,7 +130,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
     ){
         innerPadding ->
         //get weather as state
-        val weather = mainViewModel.weather.collectAsState().value
+        val w = mainViewModel.weather.collectAsState().value
 
             NavHost(
                 navController = navController,
@@ -135,13 +138,13 @@ fun DisplayUI(mainViewModel: MainViewModel){
                 modifier = Modifier.padding(innerPadding)
             ){
                 composable(route = "current"){
-                    if (weather != null) {
+                    if (w != null) {
                         CurrentWeatherUI(mainViewModel)
                     }
                 }
 
                 composable(route = "forecast"){
-                    if (weather != null) {
+                    if (w != null) {
                         MultiDayForecast(mainViewModel)
                     }
                 }
