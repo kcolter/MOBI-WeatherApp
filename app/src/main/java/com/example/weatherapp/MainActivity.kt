@@ -1,5 +1,8 @@
 package com.example.weatherapp
 
+import android.Manifest
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.location.LocationServices
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,12 +19,13 @@ import com.example.weatherapp.ui.screens.MultiDayForecast
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
+import com.google.android.gms.location.Priority
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,21 +34,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.weatherapp.models.Weather
-import com.example.weatherapp.services.WeatherService
-import com.example.weatherapp.ui.screens.MultiDayForecast
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import androidx.media3.common.util.Log
+import androidx.media3.common.util.UnstableApi
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import androidx.core.content.ContextCompat
+import android.content.pm.PackageManager
+import com.google.android.gms.tasks.CancellationTokenSource
 
 class MainActivity : ComponentActivity() {
 
     //define view model
     private lateinit var mainViewModel: MainViewModel
-
-    //variable to store API data
-    private var weather by mutableStateOf<Weather?>(null)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +55,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 //entry point
+                GetLocation()//this function also updates coordinates in our MainViewModel
 
                 //init view model
                 mainViewModel = viewModel()
@@ -143,5 +146,57 @@ fun DisplayUI(mainViewModel: MainViewModel){
                     }
                 }
             }
+    }
+}
+
+//location function copied from d2l
+@UnstableApi
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun GetLocation(
+    //inject view model here so we can pass the coordinates to it
+    viewModel: MainViewModel = viewModel()
+) {
+    // Remember the permission state(asking for Fine location)
+    val permissionState = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
+
+    if (permissionState.status.isGranted) {
+
+        // Get Location
+        val currentContext = LocalContext.current
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(currentContext)
+
+        if (ContextCompat.checkSelfPermission(
+                currentContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED)
+        {
+            val cancellationTokenSource = CancellationTokenSource()
+
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        val lat = location.latitude.toString()
+                        val lng = location.longitude.toString()
+
+                        Log.i("TESTING", "Success: $lat $lng")
+
+                        val coordinates = "$lat,$lng"
+
+                        // call a function, like in View Model, to do something with location...
+                        //pass coordinates into the viewModel
+                        viewModel.updateLocation(coordinates)
+                    }
+                    else {
+                        Log.i("TESTING", "Problem encountered: Location returned null")
+                    }
+                }
+        }
+    }
+    else {
+        // Run a side-effect (coroutine) to get permission. The permission popup.
+        LaunchedEffect(permissionState){
+            permissionState.launchPermissionRequest()
+        }
     }
 }

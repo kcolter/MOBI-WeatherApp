@@ -14,8 +14,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainViewModel : ViewModel() {
 
+
+    fun updateLocation(longAndLatIn: String){
+        _longAndLat = longAndLatIn
+    }
+
+    var _longAndLat = ""
+
     private val _weather = MutableStateFlow<Weather?>(null)
     val weather = _weather.asStateFlow()
+
 
     init {
         //create retrofit instance
@@ -29,7 +37,7 @@ class MainViewModel : ViewModel() {
 
         //get data from API
         viewModelScope.launch {
-            val w = weatherService.getForecast("d8e81af2b0f14539ba5143224252105", "Halifax", 3, "no", "no") //retrieve from api
+            val w = weatherService.getForecast("d8e81af2b0f14539ba5143224252105", _longAndLat, 3, "no", "no") //retrieve from api
 
             _weather.value = w; //write value to _weather
         }
