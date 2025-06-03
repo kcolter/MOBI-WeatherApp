@@ -29,6 +29,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -38,6 +40,25 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //create retrofit instance
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("https://api.weatherapi.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        //init interface
+
+
+
+
+
+
+
+
+
+
+
         enableEdgeToEdge()
         setContent {
             WeatherAppTheme {
