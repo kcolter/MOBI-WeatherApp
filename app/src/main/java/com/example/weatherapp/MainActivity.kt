@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DisplayUI(mainViewModel: MainViewModel){
 
-    //weather cariable to allow collection of value as state
+    //weather variable to allow collection of value as state
     val weather = mainViewModel.weather.collectAsState().value
 
     //nav controller
