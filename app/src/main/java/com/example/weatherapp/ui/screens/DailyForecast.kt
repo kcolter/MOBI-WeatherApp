@@ -81,7 +81,7 @@ fun ForecastedDay(fd: Forecastday){
 
         //Precipitation
         Column (horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Precipitation type: " + fd.day.precipitationType, style = MaterialTheme.typography.titleMedium)
+            Text(text = "Precipitation", style = MaterialTheme.typography.titleMedium)
             Row {
                 Text(text = "Amount: " + fd.day.precipitationAmount + "mm") //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 Spacer(modifier = Modifier.width(10.dp))
@@ -95,8 +95,6 @@ fun ForecastedDay(fd: Forecastday){
             Text(text= "Wind", style = MaterialTheme.typography.titleMedium)
             Row {
                 Text(text = "Speed: " + fd.day.windSpeed + " km/h")
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Direction: " + fd.day.windDirection)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
