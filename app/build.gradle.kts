@@ -59,9 +59,11 @@ dependencies {
 
     //Navigation
     implementation(libs.androidx.navigation.compose)
-
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     // Retrofit GSON Converter
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+    //Coil for images returned by API
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
 }

@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.weatherapp.MainViewModel
 
 @Composable
@@ -46,8 +47,8 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
     {
         //Weather Image
         Image(
-            painter = painterResource(R.drawable.rainy),
-            contentDescription = "Weather Image [Rainy]",
+            painter = rememberAsyncImagePainter("https:" + weather?.current?.condition?.icon),
+            contentDescription = "" + weather?.current?.condition?.icon,
             modifier = Modifier
                 .size(100.dp)
                 .padding(top = 20.dp)

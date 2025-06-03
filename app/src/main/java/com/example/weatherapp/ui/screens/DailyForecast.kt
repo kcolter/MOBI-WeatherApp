@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.weatherapp.MainViewModel
 import com.example.weatherapp.R
 import com.example.weatherapp.models.Forecast
@@ -48,7 +49,7 @@ fun ForecastedDay(fd: Forecastday){
 
         //Weather image
         Image(
-            painter = painterResource(R.drawable.sun),
+            painter = rememberAsyncImagePainter("https:" + fd.day.condition.icon),
             contentDescription = "Weather Image [placeholder]",
             modifier = Modifier
                 .size(100.dp)
