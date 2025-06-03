@@ -57,14 +57,14 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
         //use of safe call operator researched from https://kotlinlang.org/docs/null-safety.html#safe-call-operator
         //Condition
         Text(
-            text = weather?.currentWeather?.condition.toString(),
+            text = weather?.current?.condition?.text.toString(),
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
 
         //Temp.
         Text(
-            text = weather?.currentWeather?.temp_c.toString() + "° celsius",
+            text = weather?.current?.temperature.toString() + "° celsius",
             style = MaterialTheme.typography.titleLarge
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -72,12 +72,12 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
         //Precipitation type and amount on same row
         Row {
             Text(
-                text = weather?.currentWeather?.precipitationType.toString(),
+                text = weather?.current?.precipitationType.toString(),
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = weather?.currentWeather?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
+                text = weather?.current?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 style = MaterialTheme.typography.titleLarge
             )
         }
@@ -92,12 +92,12 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
 
             Row {
                 Text(
-                    text = weather?.currentWeather?.wind_dir.toString(),
+                    text = weather?.current?.wind_dir.toString(),
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = weather?.currentWeather?.wind_kph.toString() + " km/h",
+                    text = weather?.current?.wind_kph.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

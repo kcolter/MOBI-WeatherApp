@@ -12,7 +12,7 @@ interface WeatherService {
         @Query("q") q: String,
         @Query("days") days: Int,
         @Query("aqi") aqi: String,
-        @Query("key") alerts: String,
+        @Query("alerts") alerts: String,
     ) : Weather
 
 }

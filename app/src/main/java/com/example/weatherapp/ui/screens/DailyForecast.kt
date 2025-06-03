@@ -25,9 +25,10 @@ import androidx.compose.ui.unit.dp
 import com.example.weatherapp.MainViewModel
 import com.example.weatherapp.R
 import com.example.weatherapp.models.Forecast
+import com.example.weatherapp.models.*
 
 @Composable
-fun ForecastedDay(fc: Forecast){
+fun ForecastedDay(fd: Forecastday){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -39,7 +40,7 @@ fun ForecastedDay(fc: Forecast){
         Spacer(modifier = Modifier.height(10.dp))
         //date
         Text(
-            text = fc.date,
+            text = fd.date,
             color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.titleLarge
         )
@@ -56,7 +57,7 @@ fun ForecastedDay(fc: Forecast){
 
         //Condition
         Text(
-            text = fc.condition,
+            text = fd.day.condition.text,
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -70,20 +71,20 @@ fun ForecastedDay(fc: Forecast){
                 style = MaterialTheme.typography.titleMedium
             )
             Row {
-                Text(text = "High: " + fc.temperatureHigh + "° celsius")
+                Text(text = "High: " + fd.day.temperatureHigh + "° celsius")
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Low: " + fc.temperatureLow + "° celsius")
+                Text(text = "Low: " + fd.day.temperatureLow + "° celsius")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
 
         //Precipitation
         Column (horizontalAlignment = Alignment.CenterHorizontally){
-            Text(text = "Precipitation type: " + fc.precipitationType, style = MaterialTheme.typography.titleMedium)
+            Text(text = "Precipitation type: " + fd.day.precipitationType, style = MaterialTheme.typography.titleMedium)
             Row {
-                Text(text = "Amount: " + fc.precipitationAmount + "mm") //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
+                Text(text = "Amount: " + fd.day.precipitationAmount + "mm") //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Probability: " + fc.precipitationProbability + "%")
+                Text(text = "Probability: " + fd.day.precipitationProbability + "%")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -92,16 +93,16 @@ fun ForecastedDay(fc: Forecast){
         Column (horizontalAlignment = Alignment.CenterHorizontally){
             Text(text= "Wind", style = MaterialTheme.typography.titleMedium)
             Row {
-                Text(text = "Speed: " + fc.windSpeed + " km/h")
+                Text(text = "Speed: " + fd.day.windSpeed + " km/h")
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = "Direction: " + fc.windDirection)
+                Text(text = "Direction: " + fd.day.windDirection)
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
 
         //Humidity
         Text(
-            text = "Humidity: " + fc.humidity + "%",
+            text = "Humidity: " + fd.day.humidity + "%",
             modifier = Modifier
                 .padding(bottom = 10.dp)
         )
@@ -109,7 +110,7 @@ fun ForecastedDay(fc: Forecast){
 }
 
 @Composable
-fun ThreeDayForecast(mainViewModel: MainViewModel){
+fun MultiDayForecast(mainViewModel: MainViewModel){
 
     val weather = mainViewModel.weather.collectAsState().value
 
@@ -120,8 +121,8 @@ fun ThreeDayForecast(mainViewModel: MainViewModel){
 
         //created a ForecastedDay item from each forecast in the list IF weather is not null
         if (weather != null) {
-            items(weather.forecasts) { fc ->
-                ForecastedDay(fc)
+            items(weather.forecast.forecastday) { fd ->
+                ForecastedDay(fd)
             }
         }
     }

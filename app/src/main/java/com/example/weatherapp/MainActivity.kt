@@ -12,7 +12,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import com.example.weatherapp.ui.screens.CurrentWeatherUI
-import com.example.weatherapp.ui.screens.ThreeDayForecast
+import com.example.weatherapp.ui.screens.MultiDayForecast
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.weatherapp.models.Weather
 import com.example.weatherapp.services.WeatherService
+import com.example.weatherapp.ui.screens.MultiDayForecast
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -138,7 +139,7 @@ fun DisplayUI(mainViewModel: MainViewModel){
 
                 composable(route = "forecast"){
                     if (weather != null) {
-                        ThreeDayForecast(mainViewModel)
+                        MultiDayForecast(mainViewModel)
                     }
                 }
             }

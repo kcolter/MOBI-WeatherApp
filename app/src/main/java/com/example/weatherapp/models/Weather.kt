@@ -43,6 +43,6 @@ data class Day(
 )
 
 data class Weather(
-    val currentWeather: Current,
+    val current: Current,
     val forecast: Forecast //api-response structure forecast->forecastday->0, 1, 2, ...
 )
