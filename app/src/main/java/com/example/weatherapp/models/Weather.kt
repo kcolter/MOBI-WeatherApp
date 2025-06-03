@@ -10,7 +10,6 @@ data class Current(
     val precip_in: Double,
     val wind_dir: String,
     val wind_kph: Double,
-    //val imagePath: image will by taken from icon in condition
     )
 
 //Condition  used in both Current and forecastday objects
@@ -27,7 +26,6 @@ data class Forecast(
 data class Forecastday(
     val date: String, // format of YYYY-MM-DD
     val day: Day,
-    //val imagePath: String //image will by taken from icon in condition found in day
     )
 
 data class Day(
@@ -42,7 +40,14 @@ data class Day(
     val windDirection: String,
 )
 
+data class Location(
+    val name: String,
+    val region: String,
+    val country: String
+)
+
 data class Weather(
     val current: Current,
-    val forecast: Forecast //api-response structure forecast->forecastday->0, 1, 2, ...
+    val forecast: Forecast, //api-response structure forecast->forecastday->0, 1, 2, etc.
+    val location: Location
 )
