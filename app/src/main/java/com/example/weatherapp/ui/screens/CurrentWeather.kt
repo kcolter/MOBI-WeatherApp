@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.screens
 
-import com.example.weatherapp.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,13 +22,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.weatherapp.MainViewModel
 
 @Composable
-fun CurrentWeatherUI(mainViewModel: MainViewModel){
+fun CurrentWeatherUI(mainViewModel: MainViewModel) {
 
     val weather = mainViewModel.weather.collectAsState().value
 
@@ -42,7 +40,7 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
             .background(color = MaterialTheme.colorScheme.background)
             .padding(all = 20.dp)
             .fillMaxWidth()
-            .border(3.dp, MaterialTheme.colorScheme.secondary , RectangleShape)
+            .border(3.dp, MaterialTheme.colorScheme.secondary, RectangleShape)
     )
     {
         //Weather Image
@@ -71,21 +69,18 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel){
         Spacer(modifier = Modifier.height(20.dp))
 
         //Precipitation type and amount on same row
-        Row {
-            Text(
-                text = weather?.current?.precipitationType.toString(),
-                style = MaterialTheme.typography.titleLarge
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(
-                text = weather?.current?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
-                style = MaterialTheme.typography.titleLarge
-            )
+        if (weather?.current?.precip_mm?.toInt() != 0) { //if precip amount is 0, dont display this row
+            Row {
+                Text(
+                    text = weather?.current?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+            Spacer(modifier = Modifier.height(20.dp))
         }
-        Spacer(modifier = Modifier.height(20.dp))
 
         ///Wind direction and speed on same row
-        Column (horizontalAlignment = Alignment.CenterHorizontally){
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = "Wind",
                 style = MaterialTheme.typography.titleLarge
