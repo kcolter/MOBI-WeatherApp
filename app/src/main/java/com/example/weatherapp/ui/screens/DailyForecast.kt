@@ -20,12 +20,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.weatherapp.MainViewModel
-import com.example.weatherapp.R
-import com.example.weatherapp.models.Forecast
 import com.example.weatherapp.models.*
 
 @Composable

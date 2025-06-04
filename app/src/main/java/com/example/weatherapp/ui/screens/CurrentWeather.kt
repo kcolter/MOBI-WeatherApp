@@ -53,7 +53,6 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel) {
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        //use of safe call operator researched from https://kotlinlang.org/docs/null-safety.html#safe-call-operator
         //Condition
         Text(
             text = weather?.current?.condition?.text.toString(),
