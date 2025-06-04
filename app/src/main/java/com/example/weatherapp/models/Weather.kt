@@ -5,11 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class Current(
     val condition: Condition,
     @SerializedName("temp_c") val temperature: Double,
-    val precipitationType: String, //no precip-type in api, will have to determine based on mm or in not being 0 IF precipitation is present
-    val precip_mm: Double,
-    val precip_in: Double,
-    val wind_dir: String,
-    val wind_kph: Double,
+    @SerializedName("precip_mm") val precipAmount: Double,
+    @SerializedName("wind_dir") val windDirection: String,
+    @SerializedName("wind_kph") val windSpeed: Double
     )
 
 //Condition  used in both Current and forecastday objects
@@ -34,7 +32,6 @@ data class Day(
     @SerializedName("mintemp_c") val temperatureLow: Double,
     @SerializedName("maxwind_kph") val windSpeed: Double,
     @SerializedName("avghumidity")val humidity: Double,
-    val precipitationType: String,
     @SerializedName("totalprecip_mm")val precipitationAmount: Double,
     @SerializedName("daily_chance_of_rain") val precipitationProbability: Double,
     val windDirection: String

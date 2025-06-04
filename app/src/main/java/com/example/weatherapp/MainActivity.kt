@@ -179,8 +179,6 @@ fun GetLocation(
                         val lat = location.latitude.toString()
                         val lng = location.longitude.toString()
 
-                        Log.i("TESTING", "Success: $lat $lng")
-
                         val coordinates = "$lat,$lng"
 
                         // call a function, like in View Model, to do something with location...

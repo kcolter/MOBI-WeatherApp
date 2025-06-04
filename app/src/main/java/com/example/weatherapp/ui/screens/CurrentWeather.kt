@@ -68,10 +68,10 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel) {
         Spacer(modifier = Modifier.height(20.dp))
 
         //Precipitation type and amount on same row
-        if (weather?.current?.precip_mm?.toInt() != 0) { //if precip amount is 0, dont display this row
+        if (weather?.current?.precipAmount?.toInt() != 0) { //if precipitation amount is 0, don't display this row
             Row {
                 Text(
-                    text = weather?.current?.precip_mm.toString() + "mm", //TODO: once API is determined: rewrite so that the proper unit is given depending on precipitation type
+                    text = weather?.current?.precipAmount.toString() + "mm",
                     style = MaterialTheme.typography.titleLarge
                 )
             }
@@ -87,12 +87,12 @@ fun CurrentWeatherUI(mainViewModel: MainViewModel) {
 
             Row {
                 Text(
-                    text = weather?.current?.wind_dir.toString(),
+                    text = weather?.current?.windDirection.toString(),
                     style = MaterialTheme.typography.titleLarge
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = weather?.current?.wind_kph.toString() + " km/h",
+                    text = weather?.current?.windSpeed.toString() + " km/h",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

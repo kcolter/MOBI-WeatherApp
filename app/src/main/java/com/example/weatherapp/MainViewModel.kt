@@ -2,8 +2,6 @@ package com.example.weatherapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.models.Current
-import com.example.weatherapp.models.Forecast
 import com.example.weatherapp.models.Weather
 import com.example.weatherapp.services.WeatherService
 import kotlinx.coroutines.flow.MutableStateFlow
